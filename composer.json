@@ -1,0 +1,56 @@
+{
+    "name": "opis-colibri/latte",
+    "type": "opis-colibri-module",
+    "description": "Allows you to use Latte templates inside your Opis Colibri based project",
+    "keywords": ["opis", "colibri", "module", "latte module", "templating"],
+    "homepage": "http://opis.io",
+    "license": "Apache-2.0",
+    "authors": [
+        {
+            "name": "Sorin Sarca",
+            "email": "sarca_sorin@hotmail.com"
+        },
+        {
+            "name": "Marius Sarca",
+            "email": "marius.sarca@gmail.com"
+        }
+    ],
+    "require": {
+        "latte/latte": "^2.4",
+        "opis/colibri": "2.0.x-dev"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^6.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "OpisColibri\\Latte\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "OpisColibri\\Latte\\Test\\": "tests/"
+        }
+    },
+    "config": {
+        "preferred-install": "dist"
+    },
+    "prefer-stable": true,
+    "minimum-stability": "dev",
+    "extra": {
+        "module": {
+            "title": "Latte module",
+            "collector": {
+                "class": "OpisColibri\\Latte\\Collector",
+                "file": "src/Collector.php"
+            },
+            "installer": {
+                "class": "OpisColibri\\Latte\\Installer",
+                "file": "src/Installer.php"
+            }
+        },
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    }
+}
