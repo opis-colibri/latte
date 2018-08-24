@@ -15,11 +15,11 @@
  * limitations under the License.
  * ============================================================================ */
 
-namespace OpisColibri\Latte\Test;
+namespace Opis\Colibri\Modules\Latte\Test;
 
 use Opis\Colibri\Application;
-use OpisColibri\Latte\Collector\LatteFilterCollector;
-use OpisColibri\Latte\Collector\LatteMacroCollector;
+use Opis\Colibri\Modules\Latte\Collector\LatteFilterCollector;
+use Opis\Colibri\Modules\Latte\Collector\LatteMacroCollector;
 use PHPUnit\Framework\TestCase;
 
 class BaseClass extends TestCase

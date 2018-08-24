@@ -15,7 +15,7 @@
  * limitations under the License.
  * ============================================================================ */
 
-namespace OpisColibri\Latte;
+namespace Opis\Colibri\Modules\Latte;
 
 use Opis\Colibri\Collector as AbstractCollector;
 use Opis\Colibri\ItemCollectors\ViewEngineCollector;

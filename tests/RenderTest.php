@@ -15,7 +15,7 @@
  * limitations under the License.
  * ============================================================================ */
 
-namespace OpisColibri\Latte\Test;
+namespace Opis\Colibri\Modules\Latte\Test;
 
 use function Opis\Colibri\Functions\view as v;
 

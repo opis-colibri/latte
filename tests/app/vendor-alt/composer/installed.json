@@ -42,10 +42,8 @@
     "extra": {
       "module": {
         "title": "Latte",
-        "collector": {
-          "class": "OpisColibri\\Latte\\Collector",
-          "file": "src/Collector.php"
-        }
+        "collector": "Opis\\Colibri\\Modules\\Latte\\Collector",
+        "installer": "Opis\\Colibri\\Modules\\Latte\\Installer"
       },
       "branch-alias": {
         "dev-master": "1.0.x-dev"

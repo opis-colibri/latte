@@ -15,7 +15,7 @@
  * limitations under the License.
  * ============================================================================ */
 
-namespace OpisColibri\Latte;
+namespace Opis\Colibri\Modules\Latte;
 
 use Opis\Colibri\Installer as AbstractInstaller;
 use function Opis\Colibri\Functions\{

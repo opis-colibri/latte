@@ -24,12 +24,12 @@
     },
     "autoload": {
         "psr-4": {
-            "OpisColibri\\Latte\\": "src/"
+            "Opis\\Colibri\\Modules\\Latte\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "OpisColibri\\Latte\\Test\\": "tests/"
+            "Opis\\Colibri\\Modules\\Latte\\Test\\": "tests/"
         }
     },
     "config": {
@@ -40,14 +40,8 @@
     "extra": {
         "module": {
             "title": "Latte module",
-            "collector": {
-                "class": "OpisColibri\\Latte\\Collector",
-                "file": "src/Collector.php"
-            },
-            "installer": {
-                "class": "OpisColibri\\Latte\\Installer",
-                "file": "src/Installer.php"
-            }
+            "collector": "Opis\\Colibri\\Modules\\Latte\\Collector",
+            "installer": "Opis\\Colibri\\Modules\\Latte\\Installer"
         },
         "branch-alias": {
             "dev-master": "1.0-dev"

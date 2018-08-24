@@ -24,6 +24,6 @@ ini_set('opcache.enable', 0);
 
 $loader = require __DIR__ . '/../../vendor/autoload.php';
 
-$app = new Application(__DIR__, $loader);
+$app = new Application(__DIR__);
 
 return $app->bootstrap();

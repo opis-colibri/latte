@@ -15,13 +15,13 @@
  * limitations under the License.
  * ============================================================================ */
 
-use Opis\Colibri\{
+use Opis\Colibri\Core\{
     IBootstrap,
     ISettingsContainer
 };
 use Psr\Log\NullLogger as Logger;
 use Opis\Cache\Drivers\Memory as CacheDriver;
-use Opis\Config\Drivers\Ephemeral as ConfigDriver;
+use Opis\DataStore\Drivers\Memory as ConfigDriver;
 use Opis\Intl\Translator\Drivers\Memory as TranslatorDriver;
 
 return new class implements IBootstrap
@@ -30,13 +30,10 @@ return new class implements IBootstrap
     {
         date_default_timezone_set('Europe/Bucharest');
 
-        $modules = ['opis-colibri/latte'];
+        $modules = ['opis-colibri/latte' => 2];
 
         $config = new ConfigDriver([
-            'modules' => [
-                'installed' => $modules,
-                'enabled' => $modules,
-            ],
+            'modules' => $modules
         ]);
 
         $translation = new TranslatorDriver([], []);

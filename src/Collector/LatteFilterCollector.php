@@ -15,7 +15,7 @@
  * limitations under the License.
  * ============================================================================ */
 
-namespace OpisColibri\Latte\Collector;
+namespace Opis\Colibri\Modules\Latte\Collector;
 
 class LatteFilterCollector extends AbstractCollector
 {
