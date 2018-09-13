@@ -19,5 +19,5 @@ namespace Opis\Colibri\Modules\Latte\Collector;
 
 class LatteMacroCollector extends AbstractCollector
 {
-    const NAME = 'latteMacros';
+    const NAME = 'latte-macros';
 }

@@ -19,5 +19,5 @@ namespace Opis\Colibri\Modules\Latte\Collector;
 
 class LatteFilterCollector extends AbstractCollector
 {
-    const NAME = 'latteFilters';
+    const NAME = 'latte-filters';
 }
