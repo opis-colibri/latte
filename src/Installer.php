@@ -21,23 +21,26 @@ use Opis\Colibri\Installer as AbstractInstaller;
 use function Opis\Colibri\Functions\{
     app, info
 };
+use Opis\Colibri\Modules\Latte\Collector\{
+    LatteFilterCollector, LatteMacroCollector
+};
 
 class Installer extends AbstractInstaller
 {
     public function enable()
     {
         $collector = app()->getCollector();
-        $collector->register(Collector\LatteFilterCollector::NAME, Collector\LatteFilterCollector::class,
+        $collector->register(LatteFilterCollector::NAME, LatteFilterCollector::class,
             'Collect latte filters');
-        $collector->register(Collector\LatteMacroCollector::NAME, Collector\LatteMacroCollector::class,
+        $collector->register(LatteMacroCollector::NAME, LatteMacroCollector::class,
             'Collect latte macros');
     }
 
     public function disable()
     {
         $collector = app()->getCollector();
-        $collector->unregister(Collector\LatteFilterCollector::NAME);
-        $collector->unregister(Collector\LatteMacroCollector::NAME);
+        $collector->unregister(LatteFilterCollector::NAME);
+        $collector->unregister(LatteMacroCollector::NAME);
     }
 
     public function uninstall()
