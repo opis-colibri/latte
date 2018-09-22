@@ -1,5 +1,5 @@
 <?php
-/* ===========================================================================
+/* ============================================================================
  * Copyright 2018 Zindex Software
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,31 +15,30 @@
  * limitations under the License.
  * ============================================================================ */
 
-namespace Opis\Colibri\Modules\Latte\Test;
+namespace Test\Latte;
 
-use Opis\Colibri\Testing\ApplicationTestCase;
-use Opis\Colibri\Testing\Builders\ApplicationBuilder;
+use Opis\Colibri\Collector as BaseCollector;
+use Opis\Colibri\ItemCollectors\{TranslationCollector, ViewCollector};
 
-class BaseClass extends ApplicationTestCase
+class Collector extends BaseCollector
 {
     /**
-     * @inheritDoc
+     * @param ViewCollector $view
      */
-    protected static function vendorDir(): string
+    public function views(ViewCollector $view)
     {
-        return __DIR__ . '/../vendor';
+        $view->handle('{name}.latte', function ($name) {
+            return __DIR__ . "/../views/{$name}.latte";
+        });
     }
 
     /**
-     * @inheritDoc
+     * @param TranslationCollector $translation
      */
-    protected static function applicationSetup(ApplicationBuilder $builder)
+    public function translations(TranslationCollector $translation)
     {
-        $builder->addUninstalledModuleFromPath(__DIR__ . '/../');
-        $builder->addDependencies('opis-colibri/latte');
-
-        $builder->createEnabledTestModule('test-latte', 'Test\\Latte', __DIR__ . '/module', [
-            'collector' => 'Test\\Latte\\Collector',
+        $translation->addTranslations('example', [
+            'key1' => 'T-KEY1',
         ]);
     }
 }
