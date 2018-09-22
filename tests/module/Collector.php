@@ -19,6 +19,7 @@ namespace Test\Latte;
 
 use Opis\Colibri\Collector as BaseCollector;
 use Opis\Colibri\ItemCollectors\{TranslationCollector, ViewCollector};
+use Opis\Colibri\Modules\Latte\Collector\LatteFilterCollector;
 
 class Collector extends BaseCollector
 {
@@ -40,5 +41,15 @@ class Collector extends BaseCollector
         $translation->addTranslations('example', [
             'key1' => 'T-KEY1',
         ]);
+    }
+
+    /**
+     * @param LatteFilterCollector $filter
+     */
+    public function latteFilters(LatteFilterCollector $filter)
+    {
+        $filter->register('myFilter', function ($value) {
+           return 'filtered:' . $value;
+        });
     }
 }

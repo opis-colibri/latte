@@ -64,4 +64,11 @@ class RenderTest extends BaseClass
             'content' => '<b>escaped</b>'
         ]));
     }
+
+    public function testFilters()
+    {
+        $this->assertEquals('filtered:message', v('filter.latte', [
+            'content' => 'message'
+        ]));
+    }
 }

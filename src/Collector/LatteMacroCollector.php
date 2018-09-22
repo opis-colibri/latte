@@ -17,7 +17,9 @@
 
 namespace Opis\Colibri\Modules\Latte\Collector;
 
-class LatteMacroCollector extends AbstractCollector
+use Opis\Colibri\ItemCollectors\CallbackCollector;
+
+class LatteMacroCollector extends CallbackCollector
 {
     const NAME = 'latte-macros';
 }

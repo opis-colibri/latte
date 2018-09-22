@@ -22,7 +22,7 @@ use Opis\View\{
     IEngine, ViewRenderer
 };
 use function Opis\Colibri\Functions\{
-    info, app
+    info, collect
 };
 
 class LatteEngine implements IEngine
@@ -51,21 +51,15 @@ class LatteEngine implements IEngine
     {
         if (info()->installMode()) {
             $filters = $macros = [];
-        }
-        else {
-            $collector = app()->getCollector();
-
-            /** @var callable[] $filters */
-            $filters = $collector->collect(Collector\LatteFilterCollector::NAME)->getList();
-
-            /** @var callable[] $filters */
-            $macros = $collector->collect(Collector\LatteMacroCollector::NAME)->getList();
+        } else {
+            $filters = collect(Collector\LatteFilterCollector::NAME)->getList();
+            $macros = collect(Collector\LatteMacroCollector::NAME)->getList();
         }
 
         $ns = 'Opis\Colibri\Functions\\';
 
         $filters += [
-            'asset' => $ns. 'asset',
+            'asset' => $ns . 'asset',
             'csrf' => $ns . 'generateCSRFToken',
             'url' => $ns . 'getURL',
             't' => $ns . 't',
@@ -97,7 +91,7 @@ class LatteEngine implements IEngine
      */
     public function canHandle(string $path): bool
     {
-        return (bool) preg_match('/^.*\.latte$/', $path);
+        return (bool)preg_match('/^.*\.latte$/', $path);
     }
 
     /**
