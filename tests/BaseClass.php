@@ -36,10 +36,11 @@ class BaseClass extends ApplicationTestCase
     protected static function applicationSetup(ApplicationBuilder $builder)
     {
         $builder->addUninstalledModuleFromPath(__DIR__ . '/../');
-        $builder->addDependencies('opis-colibri/latte');
 
-        $builder->createEnabledTestModule('test-latte', 'Test\\Latte', __DIR__ . '/module', [
+        $builder->createInstalledTestModule('test/latte', 'Test\\Latte', __DIR__ . '/module', [
             'collector' => 'Test\\Latte\\Collector',
-        ]);
+        ], ['opis-colibri/latte']);
+
+        $builder->addDependencies('test/latte');
     }
 }
