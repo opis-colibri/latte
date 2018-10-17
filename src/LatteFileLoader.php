@@ -112,7 +112,7 @@ class LatteFileLoader implements ILoader
      */
     protected function find(string $name)
     {
-        if (is_file($name)) {
+        if (file_exists($name)) {
             return $name;
         }
 
