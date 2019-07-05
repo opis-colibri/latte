@@ -56,12 +56,12 @@ class LatteEngine implements IEngine
             $macros = collect(Collector\LatteMacroCollector::NAME)->getList();
         }
 
-        $ns = 'Opis\Colibri\Functions\\';
+        $ns = '\Opis\Colibri\Functions\\';
 
         $filters += [
             'asset' => $ns . 'asset',
             'csrf' => $ns . 'generateCSRFToken',
-            'url' => $ns . 'getURL',
+            'url' => $ns . 'getURI',
             't' => $ns . 't',
             'translate' => $ns . 't',
             'r' => $ns . 'r',
