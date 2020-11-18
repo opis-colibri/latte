@@ -1,6 +1,6 @@
 <?php
 /* ============================================================================
- * Copyright 2018 Zindex Software
+ * Copyright 2018-2020 Zindex Software
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,8 +18,8 @@
 namespace Test\Latte;
 
 use Opis\Colibri\Collector as BaseCollector;
-use Opis\Colibri\ItemCollectors\{TranslationCollector, ViewCollector};
 use Opis\Colibri\Modules\Latte\Collector\LatteFilterCollector;
+use Opis\Colibri\Collectors\{ViewCollector, TranslationCollector};
 
 class Collector extends BaseCollector
 {
@@ -28,7 +28,7 @@ class Collector extends BaseCollector
      */
     public function views(ViewCollector $view)
     {
-        $view->handle('{name}.latte', function ($name) {
+        $view->handle('{name}.latte', static function (string $name): string {
             return __DIR__ . "/../views/{$name}.latte";
         });
     }
@@ -48,7 +48,7 @@ class Collector extends BaseCollector
      */
     public function latteFilters(LatteFilterCollector $filter)
     {
-        $filter->register('myFilter', function ($value) {
+        $filter->register('myFilter', static function ($value) {
            return 'filtered:' . $value;
         });
     }

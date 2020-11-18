@@ -1,6 +1,6 @@
 <?php
 /* ============================================================================
- * Copyright 2018-2020 Zindex Software
+ * Copyright 2020 Zindex Software
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,6 +17,28 @@
 
 namespace Opis\Colibri\Modules\Latte\Collector;
 
-class LatteFilterCollector extends AbstractCollector
+use Opis\Colibri\Serializable\Collection;
+use Opis\Colibri\Collectors\BaseCollector;
+
+/**
+ * @property Collection $data
+ */
+abstract class AbstractCollector extends BaseCollector
 {
+    public function __construct()
+    {
+        parent::__construct(new Collection());
+    }
+
+    public function register(string $name, callable $callback): self
+    {
+        $this->data->add($name, $callback);
+        return $this;
+    }
+
+    public function unregister(string $name): self
+    {
+        $this->data->remove($name);
+        return $this;
+    }
 }

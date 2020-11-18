@@ -1,6 +1,6 @@
 <?php
 /* ===========================================================================
- * Copyright 2018 Zindex Software
+ * Copyright 2018-2020 Zindex Software
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,7 +18,7 @@
 namespace Opis\Colibri\Modules\Latte;
 
 use Opis\Colibri\Collector as AbstractCollector;
-use Opis\Colibri\ItemCollectors\ViewEngineCollector;
+use Opis\Colibri\Collectors\ViewEngineCollector;
 
 class Collector extends AbstractCollector
 {

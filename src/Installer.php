@@ -1,6 +1,6 @@
 <?php
 /* ===========================================================================
- * Copyright 2018 Zindex Software
+ * Copyright 2018-2020 Zindex Software
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,50 +17,31 @@
 
 namespace Opis\Colibri\Modules\Latte;
 
+use Opis\Utils\Dir;
 use Opis\Colibri\Installer as AbstractInstaller;
-use function Opis\Colibri\Functions\{
-    app, info
-};
 use Opis\Colibri\Modules\Latte\Collector\{
     LatteFilterCollector, LatteMacroCollector
 };
+use function Opis\Colibri\{app, info};
 
 class Installer extends AbstractInstaller
 {
     public function enable()
     {
-        $collector = app()->getCollector();
-        $collector->register(LatteFilterCollector::NAME, LatteFilterCollector::class,
-            'Collect latte filters');
-        $collector->register(LatteMacroCollector::NAME, LatteMacroCollector::class,
-            'Collect latte macros');
+        app()->getCollector()
+            ->register(LatteFilterCollector::class, 'Collect latte filters')
+            ->register(LatteMacroCollector::class, 'Collect latte macros');
     }
 
     public function disable()
     {
-        $collector = app()->getCollector();
-        $collector->unregister(LatteFilterCollector::NAME);
-        $collector->unregister(LatteMacroCollector::NAME);
+        app()->getCollector()
+            ->unregister(LatteFilterCollector::class)
+            ->unregister(LatteMacroCollector::class);
     }
 
     public function uninstall()
     {
-        $rmdir = function($path) use(&$rmdir) {
-            if (is_dir($path)) {
-
-                $files = array_diff(scandir($path), ['.', '..']);
-                
-                foreach ($files as $file) {
-                    $rmdir(realpath($path) . '/' . $file);
-                }
-                
-                return rmdir($path);
-            } elseif(is_file($path)) {
-                return unlink($path);
-            }
-            return false;
-        };
-        
-        $rmdir(info()->writableDir() . '/latte');
+        Dir::remove(info()->writableDir() . '/latte');
     }
 }

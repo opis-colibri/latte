@@ -1,6 +1,6 @@
 <?php
 /* ============================================================================
- * Copyright 2018 Zindex Software
+ * Copyright 2018-2020 Zindex Software
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,21 +19,19 @@ namespace Opis\Colibri\Modules\Latte;
 
 use Latte\Engine;
 use Opis\View\{
-    IEngine, ViewRenderer
+    Renderer,
+    Engine as ViewEngine
 };
-use function Opis\Colibri\Functions\{
-    info, collect
-};
+use function Opis\Colibri\{info, collect};
 
-class LatteEngine implements IEngine
+class LatteEngine implements ViewEngine
 {
-    /** @var Engine */
-    protected $latte;
+    protected Engine $latte;
 
     /**
-     * @param ViewRenderer $renderer
+     * @param Renderer $renderer
      */
-    public function __construct(ViewRenderer $renderer)
+    public function __construct(Renderer $renderer)
     {
         $info = info();
 
@@ -47,24 +45,20 @@ class LatteEngine implements IEngine
     /**
      * @param Engine $latte
      */
-    protected function initEnvironment(Engine $latte)
+    protected function initEnvironment(Engine $latte): void
     {
-        if (info()->installMode()) {
-            $filters = $macros = [];
-        } else {
-            $filters = collect(Collector\LatteFilterCollector::NAME)->getList();
-            $macros = collect(Collector\LatteMacroCollector::NAME)->getList();
-        }
+        $filters = collect(Collector\LatteFilterCollector::class)->getEntries();
+        $macros = collect(Collector\LatteMacroCollector::class)->getEntries();
 
-        $ns = '\Opis\Colibri\Functions\\';
+        $ns = '\Opis\Colibri\\';
 
         $filters += [
             'asset' => $ns . 'asset',
             'csrf' => $ns . 'generateCSRFToken',
             'url' => $ns . 'getURI',
             't' => $ns . 't',
+            'tns' => $ns . 'tns',
             'translate' => $ns . 't',
-            'r' => $ns . 'r',
             'view' => $ns . 'view',
             'render' => $ns . 'render',
         ];
@@ -95,10 +89,10 @@ class LatteEngine implements IEngine
     }
 
     /**
-     * @param ViewRenderer $renderer
+     * @param Renderer $renderer
      * @return LatteEngine
      */
-    public static function factory(ViewRenderer $renderer): self
+    public static function factory(Renderer $renderer): self
     {
         return new static($renderer);
     }

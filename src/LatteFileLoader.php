@@ -1,6 +1,6 @@
 <?php
 /* ============================================================================
- * Copyright 2018 Zindex Software
+ * Copyright 2018-2020 Zindex Software
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,26 +18,21 @@
 namespace Opis\Colibri\Modules\Latte;
 
 use RuntimeException;
-use Latte\ILoader;
-use Opis\View\ViewRenderer;
+use Latte\Loader;
+use Opis\View\Renderer;
 
-class LatteFileLoader implements ILoader
+class LatteFileLoader implements Loader
 {
-    /** @var ViewRenderer */
-    protected $renderer;
-
-    /** @var string|null */
-    protected $root = null;
-
-    /** @var int */
-    protected $rootLen = 0;
+    protected Renderer $renderer;
+    protected ?string $root = null;
+    protected int $rootLen = 0;
 
     /**
      * LatteFileLoader constructor.
-     * @param ViewRenderer $renderer
+     * @param Renderer $renderer
      * @param string|null $rootPath
      */
-    public function __construct(ViewRenderer $renderer, string $rootPath = null)
+    public function __construct(Renderer $renderer, ?string $rootPath = null)
     {
         $this->renderer = $renderer;
         if ($rootPath !== null) {
@@ -110,7 +105,7 @@ class LatteFileLoader implements ILoader
      * @param $name
      * @return string|null
      */
-    protected function find(string $name)
+    protected function find(string $name): ?string
     {
         if (file_exists($name)) {
             return $name;
